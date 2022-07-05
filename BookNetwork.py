@@ -32,7 +32,6 @@ class BookNetwork:
                     return self.dfChar.loc[self.dfChar[col] == ent, "character_firstname"].iloc[0]
 
 
-
     def _filter_entity(self, ents):
         return [ent for ent in ents if ent in self.dfChar.stack().tolist()]
 
@@ -108,6 +107,8 @@ class BookNetwork:
     def plot_graph(self, graphFolder, community=True, graphWidth="1000px", graphHeight="700px", bgColor="#222222", fontColor="white"):
         G = nx.from_pandas_edgelist(self.dfRelation, source="source", target="target", edge_attr="value", create_using=nx.Graph())
 
+        self.G = G
+
         pos = nx.kamada_kawai_layout(G)
         nx.draw(G, with_labels=True, node_color="skyblue", edge_cmap=plt.cm.Blues, pos=pos)
 
@@ -142,11 +143,26 @@ class BookNetwork:
 
 
 
-
 if __name__=="__main__":
-    book = BookNetwork()
-    book.load_list_of_characters("data/characters.txt")
-    book.load_book("data/book1.txt")
-    book.create_entity_df()
-    book.generate_relationship()
-    book.plot_graph("data")
+    books = []
+    for i in range(4):
+        book = BookNetwork()
+        book.load_list_of_characters("data/characters.txt")
+        book.load_book(f"data/book{i+1}.txt")
+        book.create_entity_df()
+        book.generate_relationship()
+        book.plot_graph("data")
+
+        books.append(book.G)
+
+    evol = [nx.degree_centrality(book) for book in books]
+
+    dfDegreeEvol = pd.DataFrame.from_records(evol)
+
+    print(dfDegreeEvol)
+
+    plt.cla()
+    plt.clf()
+    dfDegreeEvol[["Raffaella", "Elena", "Rino", "Nino", "Guido"]].plot()
+    plt.show()
+
