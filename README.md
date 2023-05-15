@@ -47,11 +47,3 @@ Contributions to this repository are welcome! If you have any improvements, sugg
 5. Open a pull request to the main repository.
 
 Please ensure that your contributions align with the existing coding style and best practices.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-For more information and detailed usage instructions, please refer to the [repository link](https://github.com/senajoaop/network-of-books.git).
