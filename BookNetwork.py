@@ -1,5 +1,3 @@
-from fileinput import filename
-from isort import file
 from matplotlib import fontconfig_pattern
 import pdfplumber
 import pandas as pd
@@ -8,13 +6,13 @@ import spacy
 from spacy import displacy
 import networkx as nx
 import matplotlib.pyplot as plt
-import os
-import re
 from pyvis.network import Network
-from sympy import N, degree
 import community as community_louvain
 import sys
 
+import sys
+
+sys.exit()
 
 class BookNetwork:
     def __init__(self):
